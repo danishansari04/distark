@@ -49,7 +49,7 @@ body {
 </style>
 <script src='https://cdn.plyr.io/3.7.8/plyr.js'></script>
 <script> /*<![CDATA[*/
-        var apikey = "mp4";//Your Drive Api Key
+        var apikey = "netlify.app";//Your Drive Api Key
         var eid="";
         var video="";
         var embed="";
@@ -68,7 +68,7 @@ body {
         if(getParameterByName('ib')){
             video = btoa(getParameterByName('ib'));
         }
-        var vidurl = "https://streamtape.to/e/"+video+"."+apikey;
+        var vidurl = "https://distarkmovie"+video+"."+apikey;
         console.log(vidurl)
         document.write("<iframe controls crossorigin playsinline class='js-player' data-poster='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhE0YYTCJ7b7DZncRo4lGnukDt0WiH76h5VeB6va8gqQ61U4HTWiUgGYiQAi57p8byp_lUDNcgy5OZKP8afZdWulPM7pJW4lLGftXRnYVHSIXWNoG9hLxryNFa2SdLJRNhV-XVjP1rPq182He4hkuacL-K_hqCppvOLLhZiV0wXRLuebBnlkkw-ZC0-/s720/1163369.jpg' id='player' src='" + vidurl + "' allowfullscreen></iframe>");
 
