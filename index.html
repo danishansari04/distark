@@ -1,102 +1,466 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-<title>Kuro Player</title>
-<style id='page-skin-1' type='text/css'>
-  <!----></style>
-<style id='page-skin-1' type='text/css'><!--
-/** <!-- Variable definitions -->
-
---></style>
-</head>
-<body style="margin: 0; padding: 0;">
-<div class='th no-items section' id='header'></div>
-<div class='no-items section' id='contoh'></div>
-<style>
-body {
-    margin: 0;
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content=
+  "width=device-width, initial-scale=1.0">
+  <title>The cricketstreams</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="logo.png">
+  <script src=
+  "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+*{
     padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
-
-.embed {
-    position: absolute;
-    background: none;
-    top: 2px;
-    z-index: 999;
-    color: aqua;
-    font-family: sans-serif;
-    font-size: 18px;
-    border: 0;
-    font-weight: 600;
-    right: 10px;
-}
-
-.js-player-wrapper {
+body{
+    width: 100%;
+    background: #0c111b;
     position: relative;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Navbar */
+.navbar{
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0 4%;
+    background:#0c111b;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+}
+.brand-logo{
+    height: 115px;
+}
+.nav-links{
+    margin-top: 10px;
+    display: flex;
+    list-style: none;
+}
+.nav-items a{
+    text-decoration: none;
+    margin-left: 20px;
+    text-transform: capitalize;
+    color: #fff;
+    opacity: 0.9;
+}
+.right-container{
+    display: block;
+    margin-left: auto;
+}
+.sub-btn{
+    background: #1f80e0;
+    height: 30px;
+    padding: 0 10px;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 14px;
+    margin: 0 10px;
+}
+/* Main carousel Section */
+.carousel-container{
+    position: relative;
+    width: 100%;
+    height: 450px;
+    padding: 60px 0;
+    overflow-x: hidden;
+    margin-top: 15px;
+}
+.carousel{
+    display: flex;
+    width: 92%;
     height: 100%;
+    position: relative;
+    margin: auto;
+}
+.slider{
+    flex: 0 0 auto;
+    margin-right: 30px;
+    position: relative;
+    background: rgba(0,0,0,0.5);
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    transition: 1s;
     overflow: hidden;
 }
+.slider img{
+    width: 70%;
+    min-height: 100%;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+}
+.slide-content{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(to right, #030b17 80%, #0c111b00);
+    color:#fff;
+}
+.movie-title{
+    padding-left: 50px;
+    text-transform: capitalize;
+    margin-top: 80px;
+}
+.movie-des{
+    width: 80%;
+    line-height: 30px;
+    padding-left: 10px;
+    margin-top: 30px;
+    opacity: 0.8;
+}
 
-.js-player {
+/* Recommended for you */
+.title{
+    color: #fff;
+    opacity: 0.9;
+    padding-left: 4%;
+    text-transform: capitalize;
+    font-size: 22px;
+    font-weight: 500;
+}
+.movies-list{
+    width: 100%;
+    height: 220px;
+    position: relative;
+    margin: 10px 0 20px;
+}
+.card-container {
+    position: relative;
+    width: 92%;
+    padding-left: 10px;
+    height: 220px;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+}
+
+.card-container::-webkit-scrollbar {
+    display: none;
+}
+
+.card {
+    position: relative;
+    min-width: 150px;
+    width: 150px;
+    height: 200px;
+    border-radius: 5x;
+    /* Remove rounded corners */
+    overflow: hidden;
+    margin-right: 10px;
+    transition: 0.5s;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Ensure proper fit without distortion */
+    background-color: transparent !important;
+    /* Ensure transparency is applied */
+}
+.card .logo-container {
+    height: 100px;
+    /* Set a fixed height for the logo container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card:hover {
+    transform: scale(1.18);
+    box-shadow: 0 0 10px rgba(8, 31, 46, 0.562);
+}
+.card:hover .card-body{
+    opacity: 1;
+}
+.card-body{
+    opacity: 0;
+    width: 100%;
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 2;
+    background: linear-gradient(to bottom, rgba(4,8,15,0), #192133 90%);
+    padding: 10px;
+    transition: 0.5s;
+}
+.name{
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-top: 60%;
+}
+.des{
+    color: #fff;
+    opacity: 0.8;
+    margin: 5px 0;
+    font-weight: 500;
+    font-size: 12px;
+}
+.watchlist-btn{
+    position: relative;
     width: 100%;
+    text-transform: capitalize;
+    background: none;
+    border: none;
+    font-weight: 500;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 5px 0;
+    cursor: pointer;
+    padding: 5px 5px;
+    border-radius: 5px;
+}
+.watchlist-btn:before{
+    content:'';
+    position: absolute;
+    top: 0;
+    left: -5px;
+    height: 35px;
+    width: 35px;
+    background-image: url(images/add.png);
+    background-size: cover;
+    transform: scale(0.4);
+}
+.watchlist-btn:hover{
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+}
+.pre-btn, .next-btn{
+    position: absolute;
+    top: 0;
+    width: 5%;
     height: 100%;
+    z-index: 2;
+    border: none;
+    cursor: pointer;
+    outline: none;
 }
-</style>
-<script src='https://cdn.plyr.io/3.7.8/plyr.js'></script>
-<script> /*<![CDATA[*/
-        var apikey = "netlify.app";//Your Drive Api Key
-        var eid="";
-        var video="";
-        var embed="";
-
-        if(!getParameterByName('id') || getParameterByName('ib')){
-          
-          embed = `
-<div class="js-player-wrapper">
-  <iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='true' frameborder='0' class='js-player' scrolling='no' src='${location.href}?id=${eid}'></iframe>
-</div>
-          `;
-          prompt('HORE BERHASIL ,AMBIL URLNYA SAJA :- ',embed);
-          window.location.href = window.location.href+'?id='+eid;
-        } 
-        video = getParameterByName('id') ;
-        if(getParameterByName('ib')){
-            video = btoa(getParameterByName('ib'));
-        }
-        var vidurl = "https://"+video+"."+apikey;
-        console.log(vidurl)
-        document.write("<iframe controls crossorigin playsinline class='js-player' data-poster='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhE0YYTCJ7b7DZncRo4lGnukDt0WiH76h5VeB6va8gqQ61U4HTWiUgGYiQAi57p8byp_lUDNcgy5OZKP8afZdWulPM7pJW4lLGftXRnYVHSIXWNoG9hLxryNFa2SdLJRNhV-XVjP1rPq182He4hkuacL-K_hqCppvOLLhZiV0wXRLuebBnlkkw-ZC0-/s720/1163369.jpg' id='player' src='" + vidurl + "' allowfullscreen></iframe>");
-
-document.addEventListener("DOMContentLoaded", function(event) { 
-  var iframe = document.querySelector('.js-player-wrapper');
-  iframe.requestFullscreen();
-});
-
-function getembed(){
-            var code = `
-<div class="js-player-wrapper">
-  <iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='true' frameborder='0' class='js-player' scrolling='no' src='${location.href}?id=${video}'></iframe>
-</div>
-          `;
-          prompt('Here is Your Embed Code :- ',code);
+.pre-btn{
+    left: 0;
+    background: linear-gradient(to right, #0c111b 0%, #0c111b00);
+}
+.next-btn{
+    right: 0;
+    background: linear-gradient(to right, #0c111b 0%, #0c111b00);
+}
+.pre-btn img, 
+.next-btn img{
+    width: 15px;
+    height: 20px;
+    opacity: 0;
 }
 
-function getParameterByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+.pre-btn:hover img,
+.next-btn:hover img{
+    opacity: 1;
 }
-/*]]>*/
-    </script>
-<script src='path/to/plyr.js'></script>
 
+@media only screen and (max-width: 768px) {
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .logo {
+        width: 100%;
+    }
+
+    .social-icons {
+        margin-top: 10px;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+}
+  </style>
+  <script>
+    const overlay = document.querySelector('.overlay');
+    const button = document.querySelector('.toggle-button');
+
+    button.addEventListener('click', () => {
+        overlay.classList.toggle('visible');
+    });
+  </script>
+  <script src="../prodevs.js" defer></script>
+  <script disable-devtool-auto='true' src=
+  'https://cdn.jsdelivr.net/npm/disable-devtool' clear-log='true'
+  disable-select='true' disable-copy='true' disable-cut='true'
+  disable-paste='true'></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxqcLRbcvB06apiAOu-vji5sw2sVg3KflSdfY5Qdw1BLw1s4c&s" alt="" class="brand-logo">
+    <div class="right-container">
+      <button onclick=
+      "document.location='https://t.me/cricketstreams'" class=
+      "sub-btn">Join Telegram</button>
+    </div>
+  </nav><!-- Main page carousel -->
+  <div class="carousel-container">
+    <div class="carousel">
+      <div class="slider">
+      <div class="slide-content">
+        <h1 class="movie-title">BigCric</h1>
+      </div><img src="https://wallpapercave.com/wp/wp9536093.jpg"
+      alt=""></div>
+    </div>
+  </div><!-- Recommended for you -->
+  <h1 class="title">STAR</h1>
+  <div class="movies-list">
+    <div class="card-container">
+      <div class="card">
+        <img class="card-img" src=
+        "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/imageContent-8301-j7hc0820-v1/imageContent-8301-j7hc0820-m1.png"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">Star Sports 1</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=1'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img" src=
+        "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/imageContent-1021-j5nj3c68-v1/imageContent-1021-j5nj3c68-m1.png"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">Star Sports 2</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=2'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img class="card-img" src=
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSMK3DN_UrC85Vo_9gK9Wnq_ruLY3ak_oTvI2n9U8jHPL13IBkvbQcATqzQpu5aulKjxw&usqp=CAU"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">DAZN 1 Espana (EPL)</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=dazn1epl'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img" src=
+        "https://image.discovery.indazn.com/ca/v2/ca/image?id=2ouwtae8ad7l1fxviow9bowpk_image-header_pEs_1661946414000&quality=70"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">DAZN 2 Espapna
+          (EPL)</h2><button onclick="document.location='https://www.bigcric.site/0/?channel=dazn2epl'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+    </div>
+  </div>--> <!-- SSC-->
+  <h1 class="title">SSC Sports</h1>
+  <div class="movies-list">
+    <button class="pre-btn" title="btn"><img src="images/pre.png"
+    alt=""></button> <button class="next-btn" title="btn"><img src=
+    "images/nxt.png" alt=""></button>
+    <div class="card-container">
+      <div class="card">
+        <img class="card-img" src=
+        "https://shahid.mbc.net/mediaObject/2021/MARCH/amjad/untitled/untitled1/Logo_SSC1HD/original/Logo_SSC1HD.png?height=auto&width=288&croppingPoint=&version=1&type=png"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">SSC Sports 1</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=SSC1'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img" src="https://i.imgur.com/fTfwMP4.png"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">SSC Sports 2</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=SSC2'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img" src="https://i.imgur.com/j1g7QP4.png"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">SSC Sports 3</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=SSC3'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img" src="https://i.imgur.com/uIinMop.png"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">SSC Sports 4</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=SSC4'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img" src="https://i.imgur.com/5lI6sCM.png"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">SSC Sports 5</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=SSC5'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img" src="https://i.imgur.com/lvyucaX.png"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">SSC Sports Extra 1</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=SSCE1'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img" src="https://i.imgur.com/Xxx1tqo.png"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">SSC Sports Extra 2</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=SSCE2'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img" src="https://i.imgur.com/qfpSgYN.png"
+        alt="">
+        <div class="card-body">
+          <h2 class="name">SSC Sports Extra 3</h2><button onclick=
+          "document.location='https://www.bigcric.site/0/?channel=SSCE3'"
+          class="watchlist-btn">Watch Live</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+            //Display a pop-up message when the page starts
+  </script>
 </body>
-</html>
+        </html>
